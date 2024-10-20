@@ -55,3 +55,10 @@ export function setLocale(newLocale: string) {
     console.error('Invalid locale. Supported locales are "en" and "es".');
   }
 }
+
+// Add this function
+import { get } from 'svelte/store';
+
+export function translate(key: string, params?: Record<string, any>): string {
+  return get(t)(key, params);
+}
