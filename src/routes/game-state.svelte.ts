@@ -1,4 +1,4 @@
-import { t } from '$lib/i18n';
+import { t, translate } from '$lib/i18n';
 
 interface Card {
   rank: string;
@@ -10,7 +10,7 @@ export class GameState {
   currentCard: Card = $state({ rank: '', suit: '' });
   nextCard: Card = $state({ rank: '', suit: '' });
   balance: number = $state(100);
-  currentBet: number = $state(1);
+  currentBet: number = $state(10);
   nextCardRevealed: boolean = $state(false);
   resultMessage: string = $state('');
 
@@ -55,16 +55,16 @@ export class GameState {
 
     if ((isHigher && nextValue > currentValue) || (!isHigher && nextValue < currentValue)) {
       this.balance += this.currentBet;
-      this.resultMessage = t.get()('correct_guess', { amount: this.currentBet });
+      this.resultMessage = translate('correct_guess', { amount: this.currentBet });
     } else if (nextValue === currentValue) {
-      this.resultMessage = t.get()('tie');
+      this.resultMessage = translate('tie');
     } else {
       this.balance -= this.currentBet;
-      this.resultMessage = t.get()('incorrect_guess', { amount: this.currentBet });
+      this.resultMessage = translate('incorrect_guess', { amount: this.currentBet });
     }
 
     if (this.balance <= 0) {
-      this.resultMessage = t.get()('game_over');
+      this.resultMessage = translate('game_over');
     }
   }
 

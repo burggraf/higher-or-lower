@@ -19,7 +19,7 @@ function handleBetChange(event: Event) {
 </script>
 
 <div class="container mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-4">{$t('higher_or_lower')}</h1>
+  <h1 class="text-2xl font-bold mb-4 text-center">{$t('higher_or_lower')}</h1>
   
   <div class="flex justify-center space-x-4 mb-4">
     <Card rank={game.currentCard.rank} suit={game.currentCard.suit} />
@@ -30,9 +30,9 @@ function handleBetChange(event: Event) {
     {/if}
   </div>
   
-  <div class="mb-4">
-    <p>{$t('balance')}: ${game.balance}</p>
-    <div class="flex items-center space-x-2">
+  <div class="mb-4 text-center">
+    <p class="mb-2">{$t('balance')}: ${game.balance}</p>
+    <div class="flex justify-center items-center space-x-2">
       <Input
         type="number"
         min="1"
@@ -40,6 +40,7 @@ function handleBetChange(event: Event) {
         value={game.currentBet}
         on:input={handleBetChange}
         disabled={game.nextCardRevealed}
+        class="w-24"
       />
       <p>{$t('current_bet')}: ${game.currentBet}</p>
     </div>
