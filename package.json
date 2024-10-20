@@ -41,6 +41,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"svelte-playing-cards": "^2.2.0"
+		"@inlang/paraglide-js": "^1.11.3"
 	}
 }
