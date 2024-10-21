@@ -13,7 +13,7 @@ export class GameState {
   currentBet: number = $state(10);
   nextCardRevealed: boolean = $state(false);
   resultMessage: string = $state('');
-
+  lastResult: 'win' | 'lose' | 'draw' | null = $state(null);
   constructor() {
     this.initializeDeck();
     this.shuffleDeck();
@@ -56,11 +56,14 @@ export class GameState {
     if ((isHigher && nextValue > currentValue) || (!isHigher && nextValue < currentValue)) {
       this.balance += this.currentBet;
       this.resultMessage = translate('correct_guess', { amount: this.currentBet });
+      this.lastResult = 'win';
     } else if (nextValue === currentValue) {
       this.resultMessage = translate('tie');
+      this.lastResult = 'draw';
     } else {
       this.balance -= this.currentBet;
       this.resultMessage = translate('incorrect_guess', { amount: this.currentBet });
+      this.lastResult = 'lose';
     }
 
     if (this.balance <= 0) {
@@ -77,6 +80,7 @@ export class GameState {
 
   nextRound() {
     if (this.balance > 0) {
+      this.deck.push(this.nextCard) // put the next card back in the deck
       this.dealCards();
       this.resultMessage = '';
     } else {

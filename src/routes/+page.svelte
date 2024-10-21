@@ -19,7 +19,6 @@ let slidePosition = tweened(0, {
 function handleGuess(isHigher: boolean) {
   game.makeGuess(isHigher);
   showResult = true;
-  
   if (game.lastResult === 'win') {
     resultColor = 'bg-green-200';
   } else if (game.lastResult === 'lose') {
