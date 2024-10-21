@@ -12,7 +12,7 @@ const game = new GameState();
 let showResult = false;
 let resultColor = '';
 let slidePosition = tweened(0, {
-    duration: 2000,
+    duration: 500,
     easing: cubicOut
 });
 
@@ -34,7 +34,7 @@ function handleGuess(isHigher: boolean) {
       resultColor = '';
       slidePosition.set(0, { duration: 0 });
     });
-  }, 1000); // Delay before sliding starts
+  }, 500); // Delay before sliding starts
 }
 
 function handleBetChange(event: Event) {
@@ -102,4 +102,5 @@ function handleBetChange(event: Event) {
       {$t('lower')}
     </Button>
   </div>
+  {game.deck.length}
 </div>
