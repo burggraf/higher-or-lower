@@ -1,9 +1,10 @@
-import { derived, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
+
 import en from './en';
 import es from './es';
 
 // Define your translations
-const translations = { en, es };
+const translations: any = { en, es };
 
 // Function to get the initial locale from localStorage or default to 'en'
 function getInitialLocale(): string {
@@ -39,7 +40,7 @@ export const t = derived(
 
     if (typeof value === 'string' && params) {
       return Object.entries(params).reduce((acc, [k, v]) => {
-        return acc.replace(new RegExp(`{{${k}}}`, 'g'), v.toString());
+        return acc.replace(new RegExp(`{${k}}`, 'g'), v.toString());
       }, value);
     }
 
@@ -55,9 +56,6 @@ export function setLocale(newLocale: string) {
     console.error('Invalid locale. Supported locales are "en" and "es".');
   }
 }
-
-// Add this function
-import { get } from 'svelte/store';
 
 export function translate(key: string, params?: Record<string, any>): string {
   return get(t)(key, params);
